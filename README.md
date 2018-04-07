@@ -1,7 +1,6 @@
 Crowd Sourcing Humanitarian Relief
 
-**Hand in Hand** is a platform that connects individuals directly to relief organizations with a transparent
-
+**Hand in Hand** is a platform that connects individuals directly to relief organizations with maximum transparency
 ## User Stories
 
 The following **required** functionality is completed:
