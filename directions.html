@@ -22,72 +22,42 @@
     <script>
         require([
             "esri/Map",
-            "esri/views/SceneView",
+            "esri/views/MapView",
             "esri/widgets/Search",
-            "esri/layers/GraphicsLayer",
-            "esri/Graphic",
+            "esri/WebMap",
             "dojo/domReady!"
         ], function(
             Map,
-            SceneView,
+            MapView,
             Search,
-            GraphicsLayer,
-            Graphic) {
+            WebMap
+            ) {
 
             var map = new Map({
                 basemap: "satellite",
                 ground: "world-elevation"
             });
 
-            var view = new SceneView({
+
+            var webmap = new WebMap({
+                portalItem: {
+                    id: "df51a7700e51400ab5ed073b1c3974a8"
+                }
+            });
+
+            var view = new MapView({
                 scale: 123456789,
                 container: "viewDiv",
-                map: map
+                map: webmap
             });
 
             var searchWidget = new Search({
                 view: view
             });
-
             // Add the search widget to the top right corner of the view
             view.ui.add(searchWidget, {
                 position: "top-right"
             });
-
-
-
-            var graphicsLayer = new GraphicsLayer();
-            map.add(graphicsLayer);
-
-            var polygon = {
-                type: "polygon", // autocasts as new Polygon()
-                rings: [
-                    [-0.184, 51.48391, 500],
-                    [-0.184, 51.48391, 100],
-                    [-0.184, 51.49091, 100],
-                    [-0.184, 51.49091, 500],
-                    [-0.172, 51.49091, 100],
-                    [-0.172, 51.49091, 500],
-                    [-0.172, 51.48391, 100],
-                    [-0.172, 51.48391, 500],
-                ]
-            };
-
-            var fillSymbol = {
-                type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: [227, 139, 79, 0.8],
-                outline: { // autocasts as new SimpleLineSymbol()
-                    color: [255, 255, 255],
-                    width: 1
-                }
-            };
-
-            var polygonGraphic = new Graphic({
-                geometry: polygon,
-                symbol: fillSymbol
-            });
-
-            graphicsLayer.add(polygonGraphic);
 
         });
     </script>
