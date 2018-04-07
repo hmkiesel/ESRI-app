@@ -18,11 +18,14 @@ The following **additional** features are implemented:
 
 - [ ] List anything else to improve the app functionality!
 
-
 ## Notes
 
 Challenges encountered while building the app.
  - filtering data to include relevant natural disasters around the globe
+
+## API, Libraries, etc.
+ - ArcGIS https://developers.arcgis.com/
+ - layerJS
 
 ## License
 
