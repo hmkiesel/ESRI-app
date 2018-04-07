@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Intro to SceneView - Create a 3D map</title>
+    <style>
+        html, body, #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.6/"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/SceneView",
+            "esri/layers/FeatureLayer",
+            "esri/dijit/Search",
+            "esri/config",
+            "dojo/domReady!"
+        ], function(Map, SceneView, FeatureLayer, Search, esriConfig){
+            esriConfig.defaults.geometryService = "http://www.example.com/arcgis/rest/services/Utilities/Geometry/GeometryServer";
+
+            var map = new Map({
+                basemap: "satellite",
+                ground: "world-elevation"
+            });
+
+            var view = new SceneView({
+                container: "viewDiv",     // Reference to the scene div created in step 5
+                map: map,                 // Reference to the map object created before the scene
+                scale: 50000000,          // Sets the initial scale to 1:50,000,000
+                center: [-101.17, 21.78]  // Sets the center point of view with lon/lat
+            });
+            var searchWidget = new Search({
+                sources: [{
+                    featureLayer: new FeatureLayer("https://services.arcgis.com/b6gLrKHqgkQb393u/arcgis/rest/services/TaxParcelQuery/FeatureServer/0", {
+                        outFields: ["Match_addr"]
+                    }),
+                    outFields: ["*"],
+                    searchFields: ["*"],
+                    exactMatch: false
+
+                }],
+                view: view
+            }, "search");
+            view.ui.add(searchWidget, {
+                position: "top-left",
+                index: 2
+            });
+            //searchWidget.startup();
+        });
+
+    </script>
+</head>
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
