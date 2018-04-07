@@ -1,6 +1,11 @@
 Crowd Sourcing Humanitarian Relief
 
 **Hand in Hand** is a platform that connects individuals directly to relief organizations with maximum transparency
+## Problem
+ With the decrease in government aid, more and more people rely on donations after a natural disaster strikes. However, people often donate items that are not needed, which creates more logisitcal challenges[1] and delay in aid[2].
+ 
+ Our platform solves this problem with transparency by combining "wedding registries" with relief organizations.  Anyone who visits the site can pick a specific site and see the items most needed by the victims.  They can choose to contribute online through Amazon Smiles or monetary donation; or they can donate items locally to their nearest relief organization site. 
+ 
 ## User Stories
 
 The following **required** functionality is completed:
@@ -26,6 +31,10 @@ Challenges encountered while building the app.
 ## API, Libraries, etc.
  - ArcGIS https://developers.arcgis.com/
  - layerJS
+
+## News Links
+ - [1] http://insidedisaster.com/haiti/response/relief-challenges
+ - [2] https://www.cbsnews.com/news/best-intentions-when-disaster-relief-brings-anything-but-relief/
 
 ## License
 
