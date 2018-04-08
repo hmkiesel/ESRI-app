@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Search Widget - 4.6</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Hand in Hand</title>
+    <h1>Hand in Hand</h1>
+    <e>Natural Disaster Donation Registries</e>
 
     <style>
         html,
@@ -14,6 +17,11 @@
             height: 100%;
             width: 100%;
         }
+        #textDiv {
+            padding: 0;
+            margin: 2px;
+            width: 100%;
+        }
     </style>
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
@@ -22,50 +30,29 @@
     <script>
         require([
             "esri/Map",
-            "esri/views/SceneView",
+            "esri/views/MapView",
             "esri/widgets/Search",
-            "esri/layers/FeatureLayer",
-            "esri/widgets/Legend",
+            "esri/WebMap",
             "dojo/domReady!"
         ], function(
             Map,
-            SceneView,
+            MapView,
             Search,
-            FeatureLayer,
-            Legend
+            WebMap
         ) {
-
-            var featureLayer = new FeatureLayer({
-                url: "https://services8.arcgis.com/CY8l0IthX2GYnm5p/ArcGIS/rest/services/DisasterDeclarationsSummaries/FeatureServer/0",
-				definitionExpression: "fyDeclared >= 2017"
-
-            });
-
             var map = new Map({
                 basemap: "satellite",
-                ground: "world-elevation",
-                layers: [featureLayer]
+                ground: "world-elevation"
             });
-
-            var view = new SceneView({
-                //scale: 123456789,
+            var webmap = new WebMap({
+                portalItem: {
+                    id: "c336069c6d114e0190d3036711a6f67c"
+                }
+            });
+            var view = new MapView({
+                scale: 123456789,
                 container: "viewDiv",
-                map: map
-            });
-
-            var legend = new Legend({
-                view: view,
-                layerInfos: [{
-                    layer: featureLayer,
-                    title: "disasters"
-                }]
-            });
-
-            // Add widget to the bottom right corner of the view
-            view.ui.add(legend, "bottom-right");
-
-            featureLayer.then(() => {
-                view.extent = featureLayer.fullExtent;
+                map: webmap
             });
             var searchWidget = new Search({
                 view: view
@@ -80,6 +67,26 @@
 
 <body>
 <div id="viewDiv"></div>
+<div id="textDiv">
+
+    <p> <strong>Hand in Hand</strong> is a platform that connects individuals
+        directly to relief organizations with maximum transparency</p>
+    <br>
+    <h4>Problem</h4>
+    <p>With the decrease in government aid, more and more people rely on donations
+        after a natural disaster strikes. However, people often donate items that are not
+        needed, which creates more logisitcal challenges<a href="ref1">[1]</a> and delay
+        in aid<a href="ref2">[2]</a>. Our platform solves this problem with transparency by
+        combining registries with relief organizations. Anyone who visits the site can select a
+        natural disaster site and see which items are most needed by the victims. They can choose
+        to contribute online through Amazon Smiles or give a monetary donation. With each donation,
+        contributers can see first-hand as the disaster site grows closer to their goals.</p>
+    <br>
+    <h4>References</h4>
+    <p id="ref1"><a href="http://insidedisaster.com/haiti/response/relief-challenges">http://insidedisaster.com/haiti/response/relief-challenges</a></p>
+    <br>
+    <p id="ref2"><a href="https://www.cbsnews.com/news/best-intentions-when-disaster-relief-brings-anything-but-relief">https://www.cbsnews.com/news/best-intentions-when-disaster-relief-brings-anything-but-relief</a></p>
+</div>
 </body>
 
 </html>
