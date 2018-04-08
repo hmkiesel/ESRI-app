@@ -58,7 +58,8 @@
             //});
 
             var featureLayer = new FeatureLayer({
-                url: "https://services8.arcgis.com/CY8l0IthX2GYnm5p/ArcGIS/rest/services/DisasterDeclarationsSummaries/FeatureServer/0"
+                url: "https://services8.arcgis.com/CY8l0IthX2GYnm5p/ArcGIS/rest/services/DisasterDeclarationsSummaries/FeatureServer/0",
+				definitionExpression: "fyDeclared >= 2017"
             });
 
             //csvLayer.renderer = {
