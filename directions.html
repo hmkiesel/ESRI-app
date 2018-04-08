@@ -24,87 +24,48 @@
             "esri/Map",
             "esri/views/SceneView",
             "esri/widgets/Search",
-            "esri/WebMap",
-            "esri/layers/CSVLayer",
             "esri/layers/FeatureLayer",
-            "esri/config",
+            "esri/widgets/Legend",
             "dojo/domReady!"
         ], function(
             Map,
             SceneView,
             Search,
-            CSVLayer,
-            esriConfig,
             FeatureLayer,
-            WebMap
-            ) {
-
-            //var url = "/DisasterDeclarationSummaries.csv";
-//           //     "https://www.fema.gov/api/open/v1/DisasterDeclarationsSummaries.csv";
-            //esriConfig.request.corsEnabledServers.push(url);
-
-            //var template = {
-            //    title: "natural disaster Info",
-            //    content: "state {state} county {declaredCountyArea} disaster {incidentType}"
-            //};
-
-            //var csvLayer = new CSVLayer({
-            //    url: url,
-            //    popupTemplate: template,
-            //   elevationInfo: {
-                    // drapes icons on the surface of the globe
-            //        mode: "on-the-ground"
-            //    }
-            //});
+            Legend
+        ) {
 
             var featureLayer = new FeatureLayer({
-                url: "https://services8.arcgis.com/CY8l0IthX2GYnm5p/ArcGIS/rest/services/DisasterDeclarationsSummaries/FeatureServer/0"
+                url: "https://services8.arcgis.com/CY8l0IthX2GYnm5p/ArcGIS/rest/services/DisasterDeclarationsSummaries/FeatureServer/0",
+                definitionExpression: "fyDeclared >= 2017"
             });
-
-            //csvLayer.renderer = {
-            //    type: "simple", // autocasts as new SimpleRenderer()
-            //    symbol: {
-            //        type: "point-3d", // autocasts as new PointSymbol3D()
-            //        symbolLayers: [{
-            //            type: "icon", // autocasts as new IconSymbol3DLayer()
-            //            material: {
-            //                color: [238, 69, 0, 0.75]
-            //           },
-            //            outline: {
-             //               width: 0.5,
-              //              color: "white"
-                //        },
-                  //      size: "12px"
-                    //}]
-                //}
-            //};
 
             var map = new Map({
                 basemap: "satellite",
                 ground: "world-elevation",
                 layers: [featureLayer]
             });
-            //map.layers.add(featureLayer);
-
-
-            /*var webmap = new WebMap({
-                portalItem: {
-                    id: "df51a7700e51400ab5ed073b1c3974a8"
-                }
-            });*/
-
 
             var view = new SceneView({
                 //scale: 123456789,
                 container: "viewDiv",
                 map: map
             });
-			
-			featureLayer.then(() => {
-				view.extent = featureLayer.fullExtent;
-			});
 
+            var legend = new Legend({
+                view: view,
+                layerInfos: [{
+                    layer: featureLayer,
+                    title: "disasters"
+                }]
+            });
 
+            // Add widget to the bottom right corner of the view
+            view.ui.add(legend, "bottom-right");
+
+            featureLayer.then(() => {
+                view.extent = featureLayer.fullExtent;
+            });
             var searchWidget = new Search({
                 view: view
             });
@@ -112,7 +73,6 @@
             view.ui.add(searchWidget, {
                 position: "top-right"
             });
-
         });
     </script>
 </head>
