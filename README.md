@@ -11,8 +11,8 @@ Crowd Sourcing Humanitarian Relief
 The following **required** functionality is completed:
 
 - [X] User can view current disasters as pins on a globe
-- [ ] User can select a pin/location to zoom in on and contribute
-- [ ] User can select item or monetary donation
+- [X] User can select a pin/location to zoom in on and contribute
+- [X] User can select item or monetary donation
 
 The following **optional** features are implemented:
 
